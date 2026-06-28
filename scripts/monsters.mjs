@@ -31,6 +31,25 @@ export function crLabel(cr) {
 }
 
 /**
+ * Friendly source label for a compendium pack: the owning package's title
+ * (a module's display title, or the system id) rather than the individual pack's
+ * label. Mirrors dnd5e's own pack→package resolution (data/shared/source-field.mjs).
+ * @param {CompendiumCollection} pack
+ * @returns {string}
+ */
+export function packSource(pack) {
+  const meta = pack?.metadata;
+  if ( !meta ) return game.i18n.localize("ENCOUNTER_ARCHITECT.Source.World");
+  const pkgId = meta.packageName ?? pack.collection?.split(".")[0];
+  switch ( meta.packageType ) {
+    case "world": return game.world?.title ?? game.i18n.localize("ENCOUNTER_ARCHITECT.Source.World");
+    case "system": return pkgId ?? game.system.id;
+    case "module": return game.modules.get(pkgId)?.title ?? pkgId;
+  }
+  return pkgId ?? meta.label;
+}
+
+/**
  * @typedef {object} NpcResult
  * @property {string} uuid
  * @property {string} name
@@ -78,7 +97,7 @@ export async function listNpcs(query = "", { limit = 60 } = {}) {
       const cr = foundry.utils.getProperty(entry, "system.details.cr") ?? 0;
       all.push({
         uuid: entry.uuid, name: entry.name, img: entry.img, cr,
-        xp: crToXp(cr), source: pack.metadata.label
+        xp: crToXp(cr), source: packSource(pack)
       });
     }
   }
@@ -99,7 +118,7 @@ export async function resolveEntry(uuid) {
   return {
     uuid, name: actor.name, img: actor.img, cr,
     xp: actor.system.details.xp?.value ?? crToXp(cr),
-    source: actor.pack ? game.packs.get(actor.pack)?.metadata.label
+    source: actor.pack ? packSource(game.packs.get(actor.pack))
       : game.i18n.localize("ENCOUNTER_ARCHITECT.Source.World")
   };
 }
