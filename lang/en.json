@@ -1,0 +1,64 @@
+{
+  "ENCOUNTER_ARCHITECT.Title": "Encounter Architect",
+  "ENCOUNTER_ARCHITECT.Launch": "Encounter Architect",
+
+  "ENCOUNTER_ARCHITECT.Ruleset.dmg2024.Label": "2024 DMG (XP)",
+  "ENCOUNTER_ARCHITECT.Ruleset.lazy.Label": "Lazy Benchmark (CR)",
+
+  "ENCOUNTER_ARCHITECT.Difficulty.low": "Low",
+  "ENCOUNTER_ARCHITECT.Difficulty.moderate": "Moderate",
+  "ENCOUNTER_ARCHITECT.Difficulty.high": "High",
+  "ENCOUNTER_ARCHITECT.Difficulty.deadly": "Beyond High",
+
+  "ENCOUNTER_ARCHITECT.TargetDifficulty": "Target",
+
+  "ENCOUNTER_ARCHITECT.Verdict.Under": "{n} under",
+  "ENCOUNTER_ARCHITECT.Verdict.Over": "{n} over",
+  "ENCOUNTER_ARCHITECT.Verdict.Budget2024": "{spent} / {budget} XP — {overUnder} the {target} budget",
+
+  "ENCOUNTER_ARCHITECT.Lazy.MayBeDeadly": "May be deadly",
+  "ENCOUNTER_ARCHITECT.Lazy.LikelySafe": "Within benchmark",
+  "ENCOUNTER_ARCHITECT.Lazy.Detail": "{spent} / {benchmark} total CR — single-monster max CR {single}",
+  "ENCOUNTER_ARCHITECT.Lazy.Benchmark": "Benchmark",
+  "ENCOUNTER_ARCHITECT.Lazy.HighPower": "High-power",
+  "ENCOUNTER_ARCHITECT.Lazy.BossBadge": "Boss",
+  "ENCOUNTER_ARCHITECT.Lazy.BossTooltip": "CR {cr} exceeds the single-monster benchmark of {max} — may be a deadly threat on its own.",
+  "ENCOUNTER_ARCHITECT.Lazy.LooseGauge": "Treat as a loose gauge — terrain, tactics, waves, rests, and magic items all shift real difficulty.",
+  "ENCOUNTER_ARCHITECT.Lazy.BossNote": "A crowned monster's CR is above the single-monster benchmark.",
+
+  "ENCOUNTER_ARCHITECT.Party.None": "No primary party is set. In the Actors sidebar, right-click a Group actor and choose \"Make Primary Party.\"",
+  "ENCOUNTER_ARCHITECT.Party.Empty": "The primary party has no player characters or allied NPCs.",
+  "ENCOUNTER_ARCHITECT.Party.Headcount": "Members",
+  "ENCOUNTER_ARCHITECT.Party.AvgLevel": "Avg level",
+  "ENCOUNTER_ARCHITECT.Party.SumLevels": "Σ levels",
+
+  "ENCOUNTER_ARCHITECT.Encounter": "Encounter",
+  "ENCOUNTER_ARCHITECT.EmptyHint": "Drag NPCs here, search below, or use the compendium browser.",
+  "ENCOUNTER_ARCHITECT.AddMonsters": "Add Monsters",
+  "ENCOUNTER_ARCHITECT.SearchPlaceholder": "Search world & compendium NPCs…",
+  "ENCOUNTER_ARCHITECT.AddTooltip": "Click to add to the encounter",
+  "ENCOUNTER_ARCHITECT.Remove": "Remove",
+  "ENCOUNTER_ARCHITECT.Browse": "Compendium browser",
+
+  "ENCOUNTER_ARCHITECT.Saved": "Saved Encounters",
+  "ENCOUNTER_ARCHITECT.Save": "Save",
+  "ENCOUNTER_ARCHITECT.SaveTitle": "Save Encounter",
+  "ENCOUNTER_ARCHITECT.SavePlaceholder": "Encounter name",
+  "ENCOUNTER_ARCHITECT.LoadTooltip": "Load this encounter",
+  "ENCOUNTER_ARCHITECT.Clear": "Clear",
+  "ENCOUNTER_ARCHITECT.ClearConfirm": "Remove all monsters from the current encounter?",
+  "ENCOUNTER_ARCHITECT.Delete": "Delete",
+  "ENCOUNTER_ARCHITECT.DeleteTitle": "Delete Encounter",
+  "ENCOUNTER_ARCHITECT.DeleteConfirm": "Permanently delete this saved encounter?",
+
+  "ENCOUNTER_ARCHITECT.Source.World": "World",
+
+  "ENCOUNTER_ARCHITECT.Notify.NotNpc": "Only NPC actors can be added to an encounter.",
+  "ENCOUNTER_ARCHITECT.Notify.NoBrowser": "The dnd5e Compendium Browser is unavailable.",
+  "ENCOUNTER_ARCHITECT.Notify.Saved": "Saved encounter \"{name}\".",
+
+  "ENCOUNTER_ARCHITECT.Settings.DefaultRuleset.Name": "Default ruleset",
+  "ENCOUNTER_ARCHITECT.Settings.DefaultRuleset.Hint": "Which encounter-building ruleset the tool opens with.",
+  "ENCOUNTER_ARCHITECT.Settings.LazyHighPower.Name": "Lazy Benchmark: high-power scaling",
+  "ENCOUNTER_ARCHITECT.Settings.LazyHighPower.Hint": "At party level 11+, show the optional higher 'deadly' threshold (¾ × total levels, or 1× at 17+)."
+}

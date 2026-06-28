@@ -1,0 +1,8 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+
+# Build artifacts (the release zip is attached to GitHub Releases, not committed)
+module.zip

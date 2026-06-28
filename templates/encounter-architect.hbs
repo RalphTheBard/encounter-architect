@@ -1,0 +1,145 @@
+<div class="ea-layout">
+
+  {{!-- Ruleset toggle --}}
+  <div class="ea-rulesets">
+    {{#each rulesets}}
+    <button type="button" class="ea-ruleset {{#if active}}active{{/if}}"
+            data-action="setRuleset" data-ruleset="{{id}}">{{label}}</button>
+    {{/each}}
+  </div>
+
+  {{!-- Party summary --}}
+  <section class="ea-party">
+    {{#if party.ok}}
+    <header>
+      <i class="fa-solid fa-users"></i>
+      <span class="ea-party-name">{{party.name}}</span>
+      <span class="ea-party-stats">
+        {{localize "ENCOUNTER_ARCHITECT.Party.Headcount"}}: <b>{{party.headcount}}</b> &bull;
+        {{localize "ENCOUNTER_ARCHITECT.Party.AvgLevel"}}: <b>{{party.avgLevel}}</b> &bull;
+        {{localize "ENCOUNTER_ARCHITECT.Party.SumLevels"}}: <b>{{party.sumLevels}}</b>
+      </span>
+    </header>
+    <div class="ea-party-members">
+      {{#each partyMembers}}
+      <span class="ea-member ea-member-{{kind}}" data-tooltip="{{name}}">
+        <img src="{{img}}" alt="{{name}}">
+        <span class="ea-member-contrib">{{contribLabel}}</span>
+      </span>
+      {{/each}}
+    </div>
+    {{else}}
+    <div class="ea-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{party.reason}}</div>
+    {{/if}}
+  </section>
+
+  {{!-- Target picker (2024 only) --}}
+  {{#if supportsTarget}}
+  <div class="ea-targets">
+    <label>{{localize "ENCOUNTER_ARCHITECT.TargetDifficulty"}}</label>
+    {{#each targets}}
+    <button type="button" class="ea-target {{#if active}}active{{/if}}"
+            data-action="setTarget" data-target="{{id}}">{{label}}</button>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  {{!-- Verdict + gauge --}}
+  <section class="ea-verdict ea-status-{{gauge.status}}">
+    <div class="ea-verdict-head">
+      <span class="ea-verdict-label">{{summary.label}}</span>
+      <span class="ea-verdict-detail">{{summary.detail}}</span>
+    </div>
+    <div class="ea-gauge">
+      <div class="ea-gauge-fill" style="width: {{gauge.valuePct}}%;"></div>
+      {{#each gauge.markers}}
+      <div class="ea-gauge-marker ea-marker-{{kind}}" style="left: {{pct}}%;"
+           data-tooltip="{{label}}: {{at}}"></div>
+      {{/each}}
+    </div>
+    {{#each notes}}
+    <p class="ea-note">{{this}}</p>
+    {{/each}}
+  </section>
+
+  {{!-- Encounter (drop target) --}}
+  <section class="ea-encounter">
+    <header class="ea-section-head">
+      <h3>{{localize "ENCOUNTER_ARCHITECT.Encounter"}} <span class="ea-cost-unit">({{costLabel}})</span></h3>
+      <div class="ea-encounter-actions">
+        <button type="button" data-action="browse" data-tooltip="{{localize 'ENCOUNTER_ARCHITECT.Browse'}}">
+          <i class="fa-solid fa-book-open-reader"></i></button>
+        <button type="button" data-action="save" data-tooltip="{{localize 'ENCOUNTER_ARCHITECT.Save'}}">
+          <i class="fa-solid fa-floppy-disk"></i></button>
+        <button type="button" data-action="clear" data-tooltip="{{localize 'ENCOUNTER_ARCHITECT.Clear'}}">
+          <i class="fa-solid fa-trash"></i></button>
+      </div>
+    </header>
+
+    {{#if isEmpty}}
+    <p class="ea-empty">{{localize "ENCOUNTER_ARCHITECT.EmptyHint"}}</p>
+    {{else}}
+    <ul class="ea-entries">
+      {{#each entries}}
+      <li class="ea-entry">
+        <img src="{{img}}" alt="{{name}}">
+        <span class="ea-entry-name">
+          {{name}}
+          {{#if flag}}<i class="fa-solid fa-crown ea-flag" data-tooltip="{{flag.tooltip}}"></i>{{/if}}
+        </span>
+        <span class="ea-entry-cr">CR {{crLabel}}</span>
+        <span class="ea-entry-xp">{{xpLabel}} XP</span>
+        <span class="ea-qty">
+          <button type="button" data-action="decrease" data-uuid="{{uuid}}"><i class="fa-solid fa-minus"></i></button>
+          <span class="ea-qty-value">{{quantity}}</span>
+          <button type="button" data-action="increase" data-uuid="{{uuid}}"><i class="fa-solid fa-plus"></i></button>
+        </span>
+        <span class="ea-entry-total">{{lineCost}}</span>
+        <button type="button" class="ea-entry-remove" data-action="remove" data-uuid="{{uuid}}"
+                data-tooltip="{{localize 'ENCOUNTER_ARCHITECT.Remove'}}"><i class="fa-solid fa-xmark"></i></button>
+      </li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </section>
+
+  {{!-- Search --}}
+  <section class="ea-search">
+    <header class="ea-section-head">
+      <h3>{{localize "ENCOUNTER_ARCHITECT.AddMonsters"}}</h3>
+      <span class="ea-result-count">{{resultCount}} / {{resultTotal}}</span>
+    </header>
+    <input type="text" name="query" value="{{query}}"
+           placeholder="{{localize 'ENCOUNTER_ARCHITECT.SearchPlaceholder'}}">
+    <ul class="ea-results">
+      {{#each results}}
+      <li class="ea-result" data-action="addResult" data-uuid="{{uuid}}" data-tooltip="{{localize 'ENCOUNTER_ARCHITECT.AddTooltip'}}">
+        <img src="{{img}}" alt="{{name}}">
+        <span class="ea-result-name">{{name}}</span>
+        <span class="ea-result-cr">CR {{crLabel}}</span>
+        <span class="ea-result-xp">{{xpLabel}} XP</span>
+        <span class="ea-result-source">{{source}}</span>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+
+  {{!-- Saved encounters --}}
+  {{#if saved.length}}
+  <section class="ea-saved">
+    <header class="ea-section-head"><h3>{{localize "ENCOUNTER_ARCHITECT.Saved"}}</h3></header>
+    <ul class="ea-saved-list">
+      {{#each saved}}
+      <li class="ea-saved-item">
+        <span class="ea-saved-name" data-action="loadSaved" data-id="{{id}}"
+              data-tooltip="{{localize 'ENCOUNTER_ARCHITECT.LoadTooltip'}}">{{name}}</span>
+        <span class="ea-saved-count">{{count}}</span>
+        <button type="button" data-action="deleteSaved" data-id="{{id}}"
+                data-tooltip="{{localize 'ENCOUNTER_ARCHITECT.Delete'}}"><i class="fa-solid fa-xmark"></i></button>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+</div>
